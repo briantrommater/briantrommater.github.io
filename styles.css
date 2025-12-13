@@ -243,3 +243,9 @@ textarea:focus{border-color: rgba(34,211,238,.4); box-shadow:0 0 0 4px rgba(34,2
   margin-top:16px;
   padding:10px 2px 0;
 }
+
+.tile {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
