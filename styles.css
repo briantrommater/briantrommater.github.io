@@ -249,3 +249,20 @@ textarea:focus{border-color: rgba(34,211,238,.4); box-shadow:0 0 0 4px rgba(34,2
   color: inherit;
   cursor: pointer;
 }
+
+/* Emergency: make sure overlays can't steal clicks */
+*::before,
+*::after {
+  pointer-events: none !important;
+}
+
+/* Ensure the actual content is above any background layers */
+header, main, .wrap, .card, .panel, .row, .btn, button {
+  position: relative;
+  z-index: 10;
+}
+
+/* And ensure buttons themselves can receive clicks */
+button, .btn {
+  pointer-events: auto !important;
+}
