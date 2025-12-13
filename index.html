@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Brian Trommater — briantrommater.net</title>
-  <meta name="description" content="Brian Trommater — cybersecurity + projects. Clean, fast landing page." />
+  <meta name="description" content="Brian Trommater — entry-level IT / cybersecurity projects." />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,21 +15,15 @@
     :root{
       --bg0:#070A12;
       --bg1:#0B1020;
-      --card:rgba(255,255,255,.06);
-      --card2:rgba(255,255,255,.09);
       --text:rgba(255,255,255,.92);
       --muted:rgba(255,255,255,.66);
-      --muted2:rgba(255,255,255,.46);
       --line:rgba(255,255,255,.12);
-
       --a:#8B5CF6;
       --b:#22D3EE;
       --c:#F97316;
-
-      --radius:22px;
-      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --radius:18px;
+      --shadow: 0 18px 55px rgba(0,0,0,.55);
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -37,46 +31,30 @@
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1200px 600px at 15% 10%, rgba(139,92,246,.22), transparent 60%),
-        radial-gradient(1100px 600px at 85% 20%, rgba(34,211,238,.18), transparent 60%),
+        radial-gradient(1000px 520px at 15% 10%, rgba(139,92,246,.22), transparent 60%),
+        radial-gradient(900px 520px at 85% 20%, rgba(34,211,238,.18), transparent 60%),
         radial-gradient(900px 500px at 60% 92%, rgba(249,115,22,.14), transparent 55%),
         linear-gradient(180deg, var(--bg0), var(--bg1));
       overflow-x:hidden;
     }
-
     body:before{
       content:"";
       position:fixed; inset:0;
       pointer-events:none;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
       mix-blend-mode:overlay;
-      opacity:.18;
-      transform:translate3d(0,0,0);
-      animation:grain 10s steps(10) infinite;
-    }
-    @keyframes grain{
-      0%{transform:translate(0,0)}
-      10%{transform:translate(-2%, -2%)}
-      20%{transform:translate(-4%, 2%)}
-      30%{transform:translate(2%, -4%)}
-      40%{transform:translate(-2%, 6%)}
-      50%{transform:translate(-6%, 2%)}
-      60%{transform:translate(6%, 0%)}
-      70%{transform:translate(0%, 6%)}
-      80%{transform:translate(3%, 2%)}
-      90%{transform:translate(-3%, -2%)}
-      100%{transform:translate(0,0)}
+      opacity:.16;
     }
 
     .wrap{
-      width:min(1080px, 92vw);
+      width:min(980px, 92vw);
       margin:0 auto;
-      padding:28px 0 72px;
+      padding:26px 0 64px;
       position:relative;
       z-index:1;
     }
 
-    .nav{
+    .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -86,7 +64,7 @@
       background:rgba(255,255,255,.03);
       border-radius:999px;
       backdrop-filter: blur(14px);
-      box-shadow: 0 12px 40px rgba(0,0,0,.28);
+      box-shadow: 0 12px 40px rgba(0,0,0,.25);
     }
     .brand{
       display:flex; align-items:center; gap:10px;
@@ -96,59 +74,30 @@
     .dot{
       width:10px; height:10px; border-radius:999px;
       background:conic-gradient(from 180deg, var(--a), var(--b), var(--c), var(--a));
-      box-shadow:0 0 0 3px rgba(255,255,255,.06), 0 0 26px rgba(34,211,238,.25);
+      box-shadow:0 0 0 3px rgba(255,255,255,.06), 0 0 22px rgba(34,211,238,.22);
     }
-    .navlinks{
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
-    .pill{
-      appearance:none;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.04);
-      color:var(--text);
-      padding:9px 12px;
-      border-radius:999px;
-      font-weight:600;
-      font-size:13px;
-      cursor:pointer;
-      text-decoration:none;
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-    }
-    .pill:hover{ transform:translateY(-1px); background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.18) }
 
     .hero{
-      margin-top:26px;
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap:18px;
-      align-items:stretch;
-    }
-    @media (max-width: 900px){
-      .hero{ grid-template-columns: 1fr; }
-    }
-
-    .card{
+      margin-top:22px;
       border:1px solid var(--line);
       background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       border-radius:var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
+      box-shadow:var(--shadow);
+      padding:22px;
       position:relative;
+      overflow:hidden;
     }
-
-    .card:after{
+    .hero:after{
       content:"";
       position:absolute; inset:-2px;
-      background: radial-gradient(600px 240px at 20% 0%, rgba(139,92,246,.22), transparent 55%),
-                  radial-gradient(600px 240px at 100% 30%, rgba(34,211,238,.18), transparent 55%);
-      opacity:.85;
+      background:
+        radial-gradient(520px 240px at 12% 0%, rgba(139,92,246,.22), transparent 60%),
+        radial-gradient(520px 240px at 95% 30%, rgba(34,211,238,.18), transparent 60%);
       pointer-events:none;
-      filter:saturate(1.1);
+      opacity:.85;
     }
+    .hero > *{ position:relative; z-index:1; }
 
-    .card > *{ position:relative; z-index:1; }
-
-    .hero-main{ padding:26px 26px 22px; }
     .kicker{
       display:inline-flex; align-items:center; gap:10px;
       padding:8px 12px;
@@ -156,43 +105,30 @@
       border-radius:999px;
       background:rgba(0,0,0,.22);
       color:var(--muted);
-      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
       font-size:12px;
     }
-    .spark{
-      width:12px; height:12px; border-radius:4px;
-      background:linear-gradient(135deg, var(--b), var(--a));
-      box-shadow:0 0 18px rgba(139,92,246,.35);
-    }
-
     h1{
       margin:14px 0 10px;
-      font-size: clamp(34px, 4vw, 54px);
+      font-size: clamp(34px, 4vw, 52px);
       line-height:1.02;
       letter-spacing:-.8px;
     }
-    .grad{
-      background:linear-gradient(90deg, rgba(255,255,255,.95), rgba(255,255,255,.72));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
     .sub{
       margin:0;
-      max-width:58ch;
+      max-width:62ch;
       color:var(--muted);
       font-size:16px;
       line-height:1.55;
     }
 
-    .cta-row{
-      margin-top:18px;
+    .actions{
+      margin-top:16px;
       display:flex;
       flex-wrap:wrap;
       gap:10px;
       align-items:center;
     }
-
     .btn{
       border:1px solid var(--line);
       background:rgba(255,255,255,.06);
@@ -207,6 +143,9 @@
       align-items:center;
       transition: transform .15s ease, background .15s ease, border-color .15s ease;
       user-select:none;
+      pointer-events:auto;
+      position:relative;
+      z-index:5;
     }
     .btn:hover{ transform:translateY(-1px); background:rgba(255,255,255,.09); border-color:rgba(255,255,255,.18) }
     .btn.primary{
@@ -214,371 +153,121 @@
       background: linear-gradient(135deg, rgba(34,211,238,.22), rgba(139,92,246,.18));
     }
 
-    .mini{
-      display:flex; align-items:center; gap:8px;
-      color:var(--muted2);
-      font-size:13px;
-      margin-left:6px;
-    }
-    .sep{ opacity:.45 }
-
-    .hero-side{
-      padding:18px;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-    .stat{
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.18);
-      border-radius:18px;
-      padding:14px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      min-height:110px;
-    }
-    .stat .label{
-      color:var(--muted);
-      font-size:12px;
-      font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-    }
-    .stat .value{
-      font-size:18px;
-      font-weight:800;
-      letter-spacing:-.2px;
-    }
-    .stat .hint{
-      color:var(--muted2);
-      font-size:13px;
-      line-height:1.4;
-    }
-
     .grid{
-      margin-top:18px;
+      margin-top:16px;
       display:grid;
       grid-template-columns: repeat(12, 1fr);
-      gap:14px;
+      gap:12px;
     }
     .tile{
       grid-column: span 4;
       padding:16px;
-      border-radius:18px;
+      border-radius:16px;
       border:1px solid var(--line);
       background:rgba(255,255,255,.04);
+      text-decoration:none;
+      color:inherit;
       transition: transform .18s ease, background .18s ease, border-color .18s ease;
       position:relative;
       overflow:hidden;
-      text-decoration:none;
-      color:inherit;
       cursor:pointer;
+      pointer-events:auto;
+      z-index:2;
     }
     .tile:hover{
       transform:translateY(-2px);
       background:rgba(255,255,255,.07);
       border-color:rgba(255,255,255,.18);
     }
-    .tile:before{
-      content:"";
-      position:absolute; inset:-40%;
-      background: radial-gradient(circle at 30% 30%, rgba(34,211,238,.18), transparent 55%),
-                  radial-gradient(circle at 70% 40%, rgba(139,92,246,.16), transparent 55%);
-      transform:rotate(12deg);
-      opacity:.9;
-      pointer-events:none;
-    }
-    .tile > *{ position:relative; z-index:1; }
-
-    @media (max-width: 900px){
-      .tile{ grid-column: span 6; }
-    }
-    @media (max-width: 560px){
-      .tile{ grid-column: span 12; }
-    }
-
-    .tile h3{
-      margin:0 0 6px;
-      font-size:16px;
-      letter-spacing:-.2px;
-    }
-    .tile p{
-      margin:0 0 10px;
-      color:var(--muted);
-      font-size:13.5px;
-      line-height:1.45;
-    }
-    .tagrow{ display:flex; gap:8px; flex-wrap:wrap; }
-    .tag{
-      font-size:12px;
-      color:rgba(255,255,255,.75);
-      border:1px solid var(--line);
-      background:rgba(0,0,0,.18);
-      padding:6px 10px;
-      border-radius:999px;
-      font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-    }
+    .tile h3{ margin:0 0 6px; font-size:16px; letter-spacing:-.2px; }
+    .tile p{ margin:0; color:var(--muted); font-size:13.5px; line-height:1.45; }
+    @media (max-width: 900px){ .tile{ grid-column: span 6; } }
+    @media (max-width: 560px){ .tile{ grid-column: span 12; } }
 
     footer{
       margin-top:18px;
-      color:var(--muted2);
+      color:rgba(255,255,255,.46);
       font-size:13px;
       display:flex;
-      align-items:center;
       justify-content:space-between;
-      gap:14px;
+      gap:12px;
       flex-wrap:wrap;
-      padding:14px 2px 0;
-    }
-    .mono{ font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
-
-    .toast{
-      position:fixed;
-      left:50%;
-      bottom:18px;
-      transform:translateX(-50%) translateY(20px);
-      opacity:0;
-      pointer-events:none;
-      background:rgba(0,0,0,.6);
-      border:1px solid rgba(255,255,255,.14);
-      color:rgba(255,255,255,.9);
-      padding:10px 12px;
-      border-radius:14px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 14px 50px rgba(0,0,0,.55);
-      transition: opacity .2s ease, transform .2s ease;
-      font-size:13px;
-    }
-    .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
-
-    @media (prefers-reduced-motion: reduce){
-      *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; }
+      padding:10px 2px 0;
+      font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <div class="nav">
-      <a class="brand" href="#top" aria-label="Home">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Home">
         <span class="dot" aria-hidden="true"></span>
         <span>briantrommater.net</span>
       </a>
-      <div class="navlinks">
-        <a class="pill" href="#projects">Projects</a>
-        <a class="pill" href="#about">About</a>
-        <a class="pill" href="#contact">Contact</a>
+      <div style="color:rgba(255,255,255,.56); font-family:'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; font-size:12px;">
+        Security+ • Projects
       </div>
-    </div>
+    </header>
 
-    <section class="hero" id="top">
-      <div class="card">
-        <div class="hero-main">
-          <div class="kicker"><span class="spark"></span><span class="mono">SECURITY • AUTOMATION • BUILDING</span></div>
-          <h1><span class="grad">Hi, I’m Brian.</span><br/>I build practical security stuff.</h1>
-          <p class="sub">
-            This is my home base — projects, experiments, and a few tools I’m turning into real-world use.
-            Clean UI, real outcomes, no fluff.
-          </p>
+    <main class="hero">
+      <div class="kicker">SECURITY • IT SUPPORT • BUILDING</div>
+      <h1>Hi, I’m Brian.</h1>
+      <p class="sub">
+        Entry-level IT / security-minded support. Here are the links that matter.
+      </p>
 
-          <div class="cta-row">
-            <a class="btn primary" href="#projects" id="btnProjects">View projects <span aria-hidden="true">→</span></a>
-            <button class="btn" id="btnCopy" type="button">Copy site link <span aria-hidden="true">⎘</span></button>
-            <span class="mini"><span class="sep">•</span> <span id="status" class="mono">online</span></span>
-          </div>
-        </div>
+      <div class="actions">
+        <a class="btn primary" href="/phishing/">Phishing Detector →</a>
+        <a class="btn" href="mailto:briantrommater@gmail.com">Email</a>
+        <a class="btn" href="https://github.com/briantrommater" target="_blank" rel="noopener">GitHub</a>
       </div>
+    </main>
 
-      <div class="card">
-        <div class="hero-side">
-          <div class="stat">
-            <div class="label">CURRENT FOCUS</div>
-            <div class="value">Entry-level Cyber / IT</div>
-            <div class="hint">Security+ + hands-on builds. Shipping usable tools and tightening the stack.</div>
-          </div>
-          <div class="stat">
-            <div class="label">NOW BUILDING</div>
-            <div class="value">Phishing Detector</div>
-            <div class="hint">Text analysis + risk scoring, with UI polish and hardening.</div>
-          </div>
-          <div class="stat">
-            <div class="label">NEXT</div>
-            <div class="value">OSCP Prep</div>
-            <div class="hint">Labs, notes, and a public trail of progress.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="grid" id="projects" aria-label="Projects">
+    <section class="grid" aria-label="Projects">
       <a class="tile" href="/phishing/">
         <h3>Phishing Detector</h3>
-        <p>Paste a text or message. Get a risk score and reasons.</p>
-        <div class="tagrow">
-          <span class="tag">full-stack</span>
-          <span class="tag">secure-ui</span>
-          <span class="tag">risk-score</span>
-        </div>
+        <p>Analyze suspicious messages and get an explainable risk score.</p>
       </a>
 
-      <a class="tile" href="#" data-toast="Add your resume PDF link here.">
-        <h3>Resume / About</h3>
-        <p>Quick background + what I’m aiming at next.</p>
-        <div class="tagrow">
-          <span class="tag">profile</span>
-          <span class="tag">skills</span>
-          <span class="tag">certs</span>
-        </div>
+      <a class="tile" href="mailto:briantrommater@gmail.com">
+        <h3>Email</h3>
+        <p>Reach me directly for IT support roles and interviews.</p>
       </a>
 
-      <a class="tile" href="#" data-toast="Add a GitHub link to a small tool.">
-        <h3>Utilities</h3>
-        <p>Small scripts + tooling: hardening, checks, automation.</p>
-        <div class="tagrow">
-          <span class="tag">powershell</span>
-          <span class="tag">bash</span>
-          <span class="tag">tools</span>
-        </div>
+      <a class="tile" href="https://github.com/briantrommater" target="_blank" rel="noopener">
+        <h3>GitHub</h3>
+        <p>Code + commits for projects on this site.</p>
       </a>
-    </section>
-
-    <section class="grid" id="about" aria-label="About">
-      <div class="tile" style="grid-column: span 7;">
-        <h3>About</h3>
-        <p>
-          I like building security tools that are actually usable, and I’m obsessed with clarity:
-          simple interfaces, strong defaults, and explainable output.
-        </p>
-        <div class="tagrow">
-          <span class="tag">Security+</span>
-          <span class="tag">web</span>
-          <span class="tag">hardening</span>
-        </div>
-      </div>
-
-      <div class="tile" id="contact" style="grid-column: span 5;">
-        <h3>Contact</h3>
-        <p>Drop in your email / GitHub / LinkedIn links here.</p>
-        <div class="tagrow">
-          <span class="tag">email</span>
-          <span class="tag">github</span>
-          <span class="tag">linkedin</span>
-        </div>
-      </div>
     </section>
 
     <footer>
       <span>© <span id="year"></span> Brian Trommater</span>
-      <span class="mono" id="clock"></span>
+      <span id="clock"></span>
     </footer>
   </div>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+    (() => {
+      const yearEl = document.getElementById("year");
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-<script>
-(() => {
-  const $  = (sel, root = document) => root.querySelector(sel);
-  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
-
-  // Smooth scroll for in-page anchors (only if target exists)
-  $$( 'a[href^="#"]' ).forEach(a => {
-    a.addEventListener("click", (e) => {
-      const href = a.getAttribute("href");
-      if (!href || href === "#") return;
-
-      const target = $(href);
-      if (!target) return;
-
-      e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  });
-
-  // Year
-  const yearEl = $("#year");
-  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
-
-  // Clock (updates every 20s)
-  const clockEl = $("#clock");
-  if (clockEl) {
-    const tick = () => {
-      const d = new Date();
-      clockEl.textContent = d.toLocaleString(undefined, {
-        weekday: "short",
-        month: "short",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-      });
-    };
-    tick();
-    setInterval(tick, 20_000);
-  }
-
-  // Status ping (cosmetic)
-  const statusEl = $("#status");
-  if (statusEl) {
-    fetch(location.href, { method: "HEAD", cache: "no-store" })
-      .then(() => (statusEl.textContent = "online"))
-      .catch(() => (statusEl.textContent = "offline"));
-  }
-
-  // Toast helper
-  const toastEl = $("#toast");
-  let toastTimer = null;
-  const showToast = (msg) => {
-    if (!toastEl) return;
-    toastEl.textContent = msg;
-    toastEl.classList.add("show");
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(() => toastEl.classList.remove("show"), 1800);
-  };
-
-  // Copy link button
-  const btnCopy = $("#btnCopy");
-  if (btnCopy) {
-    btnCopy.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(location.href);
-        showToast("Copied link to clipboard.");
-      } catch {
-        showToast("Copy failed — highlight the URL and copy manually.");
+      const clockEl = document.getElementById("clock");
+      if (clockEl) {
+        const tick = () => {
+          const d = new Date();
+          clockEl.textContent = d.toLocaleString(undefined, {
+            weekday: "short",
+            month: "short",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+          });
+        };
+        tick();
+        setInterval(tick, 20_000);
       }
-    });
-  }
-
-  // Tiles with data-toast
-  $$("[data-toast]").forEach(el => {
-    el.addEventListener("click", (e) => {
-      e.preventDefault();
-      showToast(el.getAttribute("data-toast") || "");
-    });
-  });
-
-  // Tiny parallax (mouse only, respects reduced motion)
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!reduceMotion) {
-    let raf = 0;
-
-    const apply = (x, y) => {
-      $$(".card, .tile").forEach(node => {
-        node.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      });
-    };
-
-    window.addEventListener("mousemove", (e) => {
-      if (raf) return;
-      raf = requestAnimationFrame(() => {
-        raf = 0;
-        const dx = (e.clientX / innerWidth  - 0.5) * (14 / 6);
-        const dy = (e.clientY / innerHeight - 0.5) * (14 / 6);
-        apply(dx, dy);
-      });
-    });
-
-    window.addEventListener("mouseleave", () => apply(0, 0));
-  }
-})();
-</script>
-
+    })();
+  </script>
 </body>
 </html>
