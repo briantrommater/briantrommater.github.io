@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Help Desk Troubleshooting Flow — Brian Trommater</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    .flow-wrap{ margin-top:16px; }
+    .flow{
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:16px;
+      background:rgba(255,255,255,.04);
+      padding:16px;
+      overflow:auto;
+      font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      color:rgba(255,255,255,.88);
+      line-height:1.4;
+      white-space:pre;
+    }
+    .note{ color:rgba(255,255,255,.66); font-size:14px; line-height:1.5; }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">briantrommater.net</a>
+    <nav class="nav">
+      <a href="/">Home</a>
+      <a href="/phishing/">Phishing</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+      <div class="panel-head">
+        <h1 style="margin:0">Help Desk Troubleshooting Flow</h1>
+        <span class="muted small">quick decision tree</span>
+      </div>
+      <p class="note">
+        This is the exact structure I use when troubleshooting common end-user issues:
+        clarify, isolate, fix, verify, document.
+      </p>
+
+      <div class="flow-wrap">
+        <div class="flow" role="img" aria-label="Help desk troubleshooting flow chart">
+START
+  |
+  v
+1) What is the issue category?
+   ├─ Password / Login
+   ├─ Wi-Fi / Network
+   ├─ Email / Outlook
+   ├─ Printer / Peripheral
+   ├─ Slow Computer
+   └─ App / Installation
+  |
+  v
+2) Gather basics (always)
+   - User, device, location, urgency
+   - Exact error message (screenshot if possible)
+   - What changed? (updates/new software/new password)
+   - Repro steps + when it started
+  |
+  v
+3) Quick checks (fast wins)
+   - Is it happening to 1 user or many?
+   - Restart app → restart device
+   - Check cables/power/Wi-Fi toggle
+   - Check service status/outage (if applicable)
+  |
+  v
+4) Branch by issue
+
+PASSWORD / LOGIN
+  - Confirm username + caps lock
+  - Reset password / unlock account
+  - Check MFA method + time sync
+  - Verify access works on another device
+  - If still failing → escalate (SSO/AD/IdP)
+
+WI-FI / NETWORK
+  - Confirm connected to correct SSID
+  - Forget network → reconnect
+  - Try another site/app to isolate
+  - Reboot router/AP (if user-side)
+  - ipconfig /renew + flushdns
+  - If others affected → escalate (network)
+
+EMAIL
+  - Check webmail vs desktop client
+  - Check storage quota + mailbox rules
+  - Re-authenticate account
+  - Try sending to internal + external
+  - If widespread → escalate (mail service)
+
+PRINTER / PERIPHERAL
+  - Power cycle printer
+  - Check paper/ink/jams
+  - Confirm correct printer selected
+  - Remove + re-add printer
+  - Test print from another device
+  - If shared printer down → escalate
+
+SLOW COMPUTER
+  - Task Manager: CPU/RAM/Disk usage
+  - Free disk space
+  - Startup apps cleanup
+  - Update + reboot
+  - Malware scan (if needed)
+  - If hardware failing → escalate/replace
+
+APP / INSTALL
+  - Confirm permissions / license
+  - Reinstall / repair
+  - Run as admin (if appropriate)
+  - Check antivirus blocks
+  - Capture logs/error codes → escalate
+
+  |
+  v
+5) Verify fix + document
+   - Confirm user can complete original task
+   - Document: cause, fix, prevention, next steps
+
+END
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
