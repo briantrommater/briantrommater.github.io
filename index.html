@@ -474,96 +474,111 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script>
-    // Smooth scroll for in-page anchors
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', (e) => {
-        const id = a.getAttribute('href');
-        const el = document.querySelector(id);
-        if (!el) return;
-        e.preventDefault();
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
+<script>
+(() => {
+  const $  = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  // Smooth scroll for in-page anchors (only if target exists)
+  $$( 'a[href^="#"]' ).forEach(a => {
+    a.addEventListener("click", (e) => {
+      const href = a.getAttribute("href");
+      if (!href || href === "#") return;
+
+      const target = $(href);
+      if (!target) return;
+
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
+  });
 
-    // Year + clock
-    const yearEl = document.getElementById('year');
-    const clockEl = document.getElementById('clock');
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  // Year
+  const yearEl = $("#year");
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-    function tick(){
+  // Clock (updates every 20s)
+  const clockEl = $("#clock");
+  if (clockEl) {
+    const tick = () => {
       const d = new Date();
-      if (!clockEl) return;
       clockEl.textContent = d.toLocaleString(undefined, {
-        weekday: 'short', month: 'short', day: '2-digit',
-        hour: '2-digit', minute: '2-digit'
+        weekday: "short",
+        month: "short",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
       });
-    }
-    tick(); setInterval(tick, 1000 * 20);
+    };
+    tick();
+    setInterval(tick, 20_000);
+  }
 
-    // Status ping (just cosmetic)
-    const statusEl = document.getElementById('status');
-    (async () => {
-      if (!statusEl) return;
-      try{
-        await fetch(location.href, { method: 'HEAD', cache: 'no-store' });
-        statusEl.textContent = 'online';
-      }catch{
-        statusEl.textContent = 'offline';
+  // Status ping (cosmetic)
+  const statusEl = $("#status");
+  if (statusEl) {
+    fetch(location.href, { method: "HEAD", cache: "no-store" })
+      .then(() => (statusEl.textContent = "online"))
+      .catch(() => (statusEl.textContent = "offline"));
+  }
+
+  // Toast helper
+  const toastEl = $("#toast");
+  let toastTimer = null;
+  const showToast = (msg) => {
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove("show"), 1800);
+  };
+
+  // Copy link button
+  const btnCopy = $("#btnCopy");
+  if (btnCopy) {
+    btnCopy.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(location.href);
+        showToast("Copied link to clipboard.");
+      } catch {
+        showToast("Copy failed — highlight the URL and copy manually.");
       }
-    })();
+    });
+  }
 
-    // Toast helper
-    const toast = document.getElementById('toast');
-    let toastTimer = null;
-    function showToast(msg){
-      if (!toast) return;
-      toast.textContent = msg;
-      toast.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
-    }
+  // Tiles with data-toast
+  $$("[data-toast]").forEach(el => {
+    el.addEventListener("click", (e) => {
+      e.preventDefault();
+      showToast(el.getAttribute("data-toast") || "");
+    });
+  });
 
-    // Copy link button
-    const btnCopy = document.getElementById('btnCopy');
-    if (btnCopy) {
-      btnCopy.addEventListener('click', async () => {
-        try{
-          await navigator.clipboard.writeText(location.href);
-          showToast('Copied link to clipboard.');
-        }catch{
-          showToast('Copy failed — highlight the URL and copy manually.');
-        }
+  // Tiny parallax (mouse only, respects reduced motion)
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduceMotion) {
+    let raf = 0;
+
+    const apply = (x, y) => {
+      $$(".card, .tile").forEach(node => {
+        node.style.transform = `translate3d(${x}px, ${y}px, 0)`;
       });
-    }
+    };
 
-    // Demo tiles
-    document.querySelectorAll('[data-toast]').forEach(el => {
-      el.addEventListener('click', (e) => {
-        e.preventDefault();
-        showToast(el.getAttribute('data-toast'));
+    window.addEventListener("mousemove", (e) => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const dx = (e.clientX / innerWidth  - 0.5) * (14 / 6);
+        const dy = (e.clientY / innerHeight - 0.5) * (14 / 6);
+        apply(dx, dy);
       });
     });
 
-    // Tiny parallax glow follow (mouse only)
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!prefersReduced) {
-      let raf = null;
-      window.addEventListener('mousemove', (e) => {
-        if (raf) return;
-        raf = requestAnimationFrame(() => {
-          raf = null;
-          const x = (e.clientX / window.innerWidth - 0.5) * 14;
-          const y = (e.clientY / window.innerHeight - 0.5) * 14;
-          document.querySelectorAll('.card, .tile').forEach(card => {
-            card.style.transform = `translate3d(${x/6}px, ${y/6}px, 0)`;
-          });
-        });
-      });
-      window.addEventListener('mouseleave', () => {
-        document.querySelectorAll('.card, .tile').forEach(card => card.style.transform = '');
-      });
-    }
-  </script>
+    window.addEventListener("mouseleave", () => apply(0, 0));
+  }
+})();
+</script>
+
 </body>
 </html>
