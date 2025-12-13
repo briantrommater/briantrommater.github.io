@@ -22,9 +22,9 @@
       --muted2:rgba(255,255,255,.46);
       --line:rgba(255,255,255,.12);
 
-      --a:#8B5CF6;  /* purple */
-      --b:#22D3EE;  /* cyan */
-      --c:#F97316;  /* orange */
+      --a:#8B5CF6;
+      --b:#22D3EE;
+      --c:#F97316;
 
       --radius:22px;
       --shadow: 0 20px 60px rgba(0,0,0,.55);
@@ -44,7 +44,6 @@
       overflow-x:hidden;
     }
 
-    /* subtle animated grain */
     body:before{
       content:"";
       position:fixed; inset:0;
@@ -77,7 +76,6 @@
       z-index:1;
     }
 
-    /* top nav */
     .nav{
       display:flex;
       align-items:center;
@@ -118,7 +116,6 @@
     }
     .pill:hover{ transform:translateY(-1px); background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.18) }
 
-    /* hero */
     .hero{
       margin-top:26px;
       display:grid;
@@ -225,7 +222,6 @@
     }
     .sep{ opacity:.45 }
 
-    /* right side card */
     .hero-side{
       padding:18px;
       display:flex;
@@ -258,7 +254,6 @@
       line-height:1.4;
     }
 
-    /* projects */
     .grid{
       margin-top:18px;
       display:grid;
@@ -274,6 +269,9 @@
       transition: transform .18s ease, background .18s ease, border-color .18s ease;
       position:relative;
       overflow:hidden;
+      text-decoration:none;
+      color:inherit;
+      cursor:pointer;
     }
     .tile:hover{
       transform:translateY(-2px);
@@ -320,7 +318,6 @@
       font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
     }
 
-    /* footer */
     footer{
       margin-top:18px;
       color:var(--muted2);
@@ -334,7 +331,6 @@
     }
     .mono{ font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
 
-    /* toast */
     .toast{
       position:fixed;
       left:50%;
@@ -354,7 +350,6 @@
     }
     .toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 
-    /* motion-reduced */
     @media (prefers-reduced-motion: reduce){
       *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; }
     }
@@ -387,7 +382,7 @@
 
           <div class="cta-row">
             <a class="btn primary" href="#projects" id="btnProjects">View projects <span aria-hidden="true">→</span></a>
-            <button class="btn" id="btnCopy">Copy site link <span aria-hidden="true">⎘</span></button>
+            <button class="btn" id="btnCopy" type="button">Copy site link <span aria-hidden="true">⎘</span></button>
             <span class="mini"><span class="sep">•</span> <span id="status" class="mono">online</span></span>
           </div>
         </div>
@@ -494,10 +489,11 @@
     // Year + clock
     const yearEl = document.getElementById('year');
     const clockEl = document.getElementById('clock');
-    yearEl.textContent = new Date().getFullYear();
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     function tick(){
       const d = new Date();
+      if (!clockEl) return;
       clockEl.textContent = d.toLocaleString(undefined, {
         weekday: 'short', month: 'short', day: '2-digit',
         hour: '2-digit', minute: '2-digit'
@@ -508,6 +504,7 @@
     // Status ping (just cosmetic)
     const statusEl = document.getElementById('status');
     (async () => {
+      if (!statusEl) return;
       try{
         await fetch(location.href, { method: 'HEAD', cache: 'no-store' });
         statusEl.textContent = 'online';
@@ -520,6 +517,7 @@
     const toast = document.getElementById('toast');
     let toastTimer = null;
     function showToast(msg){
+      if (!toast) return;
       toast.textContent = msg;
       toast.classList.add('show');
       clearTimeout(toastTimer);
@@ -527,14 +525,17 @@
     }
 
     // Copy link button
-    document.getElementById('btnCopy').addEventListener('click', async () => {
-      try{
-        await navigator.clipboard.writeText(location.href);
-        showToast('Copied link to clipboard.');
-      }catch{
-        showToast('Copy failed — highlight the URL and copy manually.');
-      }
-    });
+    const btnCopy = document.getElementById('btnCopy');
+    if (btnCopy) {
+      btnCopy.addEventListener('click', async () => {
+        try{
+          await navigator.clipboard.writeText(location.href);
+          showToast('Copied link to clipboard.');
+        }catch{
+          showToast('Copy failed — highlight the URL and copy manually.');
+        }
+      });
+    }
 
     // Demo tiles
     document.querySelectorAll('[data-toast]').forEach(el => {
