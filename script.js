@@ -1,3 +1,6 @@
+console.log("PHISHING scripts.js loaded");
+
+
 const $ = (id) => document.getElementById(id);
 
 const yearEl = $("year");
