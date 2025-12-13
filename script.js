@@ -1,7 +1,7 @@
 const $ = (id) => document.getElementById(id);
 
 const yearEl = $("year");
-yearEl.textContent = new Date().getFullYear();
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 const analyzeBtn = $("analyzeBtn");
 const clearBtn = $("clearBtn");
@@ -15,6 +15,13 @@ const signalsHitEl = $("signalsHit");
 const linksFoundEl = $("linksFound");
 
 const ring = document.querySelector(".ring");
+
+// Hard stop with a clear error if required elements are missing
+const required = { analyzeBtn, clearBtn, input, scoreNum, verdictPill, reasonsEl, confidenceEl, signalsHitEl, linksFoundEl, ring };
+for (const [name, el] of Object.entries(required)) {
+  if (!el) throw new Error(`Missing required element: ${name}`);
+}
+
 
 // ---- Heuristic signals ----
 // Weight is how much it pushes risk score.
