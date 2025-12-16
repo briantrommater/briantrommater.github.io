@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Windows 11 Cleanup & Hardening — Brian Trommater</title>
+  <meta name="description" content="Windows 11 cleanup and hardening: startup audit, Defender baseline, scheduled tasks, and OEM bloat removal." />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+
+<body>
+  <header class="top">
+    <a class="brand" href="/">briantrommater.net</a>
+    <nav class="nav">
+      <a href="/#projects">Projects</a>
+      <a href="/phishing/">Phishing Detector</a>
+      <a href="mailto:briantrommater@gmail.com">Email</a>
+      <a href="https://github.com/briantrommater" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-left">
+        <p class="kicker">IT SUPPORT • WINDOWS 11 • HARDENING</p>
+        <h1>Windows 11 Cleanup & Hardening</h1>
+        <p class="sub">
+          Structured cleanup + security baseline work: reduced startup noise, validated Defender,
+          audited scheduled tasks, removed OEM bloat, and confirmed a stable post-reboot baseline.
+        </p>
+      </div>
+
+      <div class="hero-right">
+        <div class="stat">
+          <span class="stat-label">Outcome</span>
+          <span class="stat-value">Cleaner + faster baseline</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Focus</span>
+          <span class="stat-value">Practical help desk work</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>What I did</h2>
+        <span class="muted small">Real system, real results</span>
+      </div>
+
+      <div class="grid" style="margin-top:12px;">
+        <div class="panel" style="grid-column: span 6;">
+          <h3 style="margin:0 0 8px;">1) Startup & performance review</h3>
+          <ul class="list">
+            <li>Audited startup apps in Task Manager</li>
+            <li>Disabled non-essential startup entries (launchers, unused utilities)</li>
+            <li>Reduced background activity and memory usage at idle</li>
+          </ul>
+          <p class="muted small">Result: faster boot + fewer background processes</p>
+        </div>
+
+        <div class="panel" style="grid-column: span 6;">
+          <h3 style="margin:0 0 8px;">2) Security baseline verification</h3>
+          <ul class="list">
+            <li>Confirmed Microsoft Defender real-time protection + updates</li>
+            <li>Ran scans and reviewed protection history</li>
+            <li>Verified no unnecessary exclusions were present</li>
+          </ul>
+          <p class="muted small">Result: clean endpoint protection baseline</p>
+        </div>
+
+        <div class="panel" style="grid-column: span 6;">
+          <h3 style="margin:0 0 8px;">3) Scheduled task audit</h3>
+          <ul class="list">
+            <li>Reviewed Task Scheduler for OEM / third-party updater tasks</li>
+            <li>Disabled/removed unnecessary vendor and app tasks</li>
+            <li>Reviewed OneDrive tasks and removed redundant background updates</li>
+          </ul>
+          <p class="muted small">Result: reduced background churn + smaller attack surface</p>
+        </div>
+
+        <div class="panel" style="grid-column: span 6;">
+          <h3 style="margin:0 0 8px;">4) OEM bloatware removal</h3>
+          <ul class="list">
+            <li>Identified and removed redundant OEM utilities</li>
+            <li>Reduced vendor services running in the background</li>
+            <li>Kept required drivers and core Windows components intact</li>
+          </ul>
+          <p class="muted small">Result: cleaner system with fewer services</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" style="margin-top:14px;">
+      <div class="panel-head">
+        <h2>Baseline after cleanup</h2>
+        <span class="muted small">Post-reboot validation</span>
+      </div>
+
+      <div class="grid" style="margin-top:12px;">
+        <div class="stat" style="grid-column: span 3;">
+          <span class="stat-label">CPU</span>
+          <span class="stat-value">~2%</span>
+        </div>
+        <div class="stat" style="grid-column: span 3;">
+          <span class="stat-label">Memory</span>
+          <span class="stat-value">~50–55%</span>
+        </div>
+        <div class="stat" style="grid-column: span 3;">
+          <span class="stat-label">Disk</span>
+          <span class="stat-value">Near idle</span>
+        </div>
+        <div class="stat" style="grid-column: span 3;">
+          <span class="stat-label">Network</span>
+          <span class="stat-value">Near idle</span>
+        </div>
+      </div>
+
+      <p class="muted" style="margin-top:12px;">
+        This mirrors common help desk work: speeding up slow PCs, trimming startup clutter,
+        verifying security controls, and stabilizing a clean baseline.
+      </p>
+    </section>
+
+    <section class="panel" style="margin-top:14px;">
+      <div class="panel-head">
+        <h2>Skills demonstrated</h2>
+        <span class="muted small">What this shows employers</span>
+      </div>
+      <ul class="list">
+        <li>Windows 11 administration (startup apps, scheduled tasks, stability checks)</li>
+        <li>Endpoint security verification (Defender, scans, exclusions awareness)</li>
+        <li>Performance troubleshooting and baseline measurement</li>
+        <li>Security-minded support approach (reduce surface area, keep required drivers)</li>
+      </ul>
+    </section>
+
+    <footer class="foot">
+      <span>© <span id="year"></span> Brian Trommater</span>
+      <span class="muted small"><a href="/#projects">Back to Projects</a></span>
+    </footer>
+  </main>
+
+  <script>
+    // year only (keep this page simple)
+    const y = document.getElementById("year");
+    if (y) y.textContent = String(new Date().getFullYear());
+  </script>
+</body>
+</html>
